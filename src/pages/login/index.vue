@@ -71,7 +71,7 @@ export default {
 <style scoped>
 .main {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row-reverse; 
     padding-right: 700px;
 }
 .login-box {
