@@ -4,8 +4,9 @@
             <el-breadcrumb-item to="/home">首页</el-breadcrumb-item>
             <el-breadcrumb-item v-for="item in NavMenuList" :to="item.router" :key="item.path">{{item.name}}</el-breadcrumb-item>
         </el-breadcrumb> -->
-        {{this.$store.state.counter}}
-        <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
+        <!-- {{this.$store.state.counter}} -->
+        {{this.$store.state.conmponentlist}}
+        <!-- <el-tabs v-model="editableTabsValue" type="card" editable @edit="handleTabsEdit">
             <el-tab-pane
                 :key="item.name"
                 v-for="(item, index) in editableTabs"
@@ -13,6 +14,16 @@
                 :name="item.name"
             >
                 {{item.content}}
+            </el-tab-pane>
+        </el-tabs> -->
+        <el-tabs v-model="editableTabsValue" type="card" closable @edit="handleTabsEdit" @tab-click="tabClick">
+            <el-tab-pane label="首页"></el-tab-pane>
+            <el-tab-pane
+                :key="item.name"
+                v-for="(item, index) in editableTabs"
+                :label="item.title"
+                :name="item.name"
+            >
             </el-tab-pane>
         </el-tabs>
         <router-view/>
@@ -26,7 +37,7 @@ export default {
       return {
             NavMenuList: [],
 
-            editableTabsValue: '2',
+            editableTabsValue: '1',
             editableTabs: [{
             title: 'Tab 1',
             name: '1',
@@ -54,6 +65,10 @@ export default {
         this.getData();
     },
 
+    computed() {
+
+    },
+
     methods: {
       getData() {
             menuList.menulist().then(res => {
@@ -71,6 +86,14 @@ export default {
       //     let matched = this.$route.matched.filter(item => item.name);
       //     this.menuList = matched;
       // },
+
+      tabhomeClick() {
+        alert()
+      },
+
+      tabClick(val) {
+          this.$router.push({name: 'home'});
+      },
 
       handleTabsEdit(targetName, action) {
         if (action === 'add') {

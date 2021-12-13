@@ -12,7 +12,7 @@
                             <span>{{firstitem.name}}</span>
                         </template>
                         <el-menu-item-group class="menugroup" v-for="seconditem in firstitem.children" :key="seconditem">
-                            <el-menu-item :index="seconditem.router">
+                            <el-menu-item :index="seconditem.router" @click="clickMenu(seconditem)">
                                 <i :class="seconditem.icon"></i>
                                 <span>{{seconditem.name}}</span>
                             </el-menu-item>
@@ -45,6 +45,11 @@ export default {
                 console.log(this.mentitemList);
             })
         },
+
+        clickMenu(val) {
+            this.$store.commit('menuinformation', val);
+            //this.$router.push({ name: val.name });
+        }
     }
 }
 </script>
